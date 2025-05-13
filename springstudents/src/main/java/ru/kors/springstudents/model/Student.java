@@ -14,9 +14,9 @@ import java.time.LocalDate;
 @ToString
 public class Student {
 
-    @Column(name="id", nullable = false)
     @Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="id")
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="first_name")
     private String firstName;
