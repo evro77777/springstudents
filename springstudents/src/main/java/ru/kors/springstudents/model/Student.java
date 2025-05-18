@@ -6,12 +6,10 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
+@Data
 @Table(name = "students")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
 public class Student {
 
     @Id

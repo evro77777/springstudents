@@ -50,10 +50,12 @@ public class InMemoryStudentDAO {
     }
 
 
-    public void deleteStudent(String email) {
+    public String deleteStudent(String email) {
         var student = findByEmail(email);
         if (student != null) {
             STUDENTS.remove(student);
+            return String.format("Student %s deleted", email);
         }
+        return "Student not found";
     }
 }

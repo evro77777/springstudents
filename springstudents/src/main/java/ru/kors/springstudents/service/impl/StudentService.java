@@ -26,6 +26,7 @@ public class StudentService implements ru.kors.springstudents.service.StudentSer
         //todo#1
         Optional<Student> studentOptional = Optional.ofNullable(repository.findByEmail(student.getEmail()));
         Optional<Student> studentOptionalById = repository.findById(student.getId());
+        System.out.println("test ...."+ studentOptional + "_____"+ studentOptionalById);
         if (studentOptional.isPresent() || studentOptionalById.isPresent()) {
             throw new IllegalStateException("A student  already exists");
         }
@@ -49,5 +50,6 @@ public class StudentService implements ru.kors.springstudents.service.StudentSer
     @Override
     public void deleteStudent(String email) {
         repository.deleteByEmail(email);
+
     }
 }
