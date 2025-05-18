@@ -2,11 +2,11 @@ package ru.kors.springstudents.controller;
 
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import ru.kors.springstudents.model.MyUser;
 import ru.kors.springstudents.model.Student;
-import ru.kors.springstudents.service.StudentService;
+import ru.kors.springstudents.service.students.StudentService;
 
 import java.util.List;
 
@@ -54,5 +54,11 @@ public class StudentController {
         studentService.deleteStudent(email);
     }
 
+
+    @PostMapping("/new_user")
+    public String addUser(@RequestBody MyUser user){
+        studentService.addUser(user);
+        return "User  is saved";
+    }
 
 }

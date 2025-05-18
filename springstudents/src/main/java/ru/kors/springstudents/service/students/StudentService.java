@@ -1,6 +1,7 @@
-package ru.kors.springstudents.service;
+package ru.kors.springstudents.service.students;
 
 
+import ru.kors.springstudents.model.MyUser;
 import ru.kors.springstudents.model.Student;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface StudentService {
     Student updateStudent(Student student);
 
     void deleteStudent(String email);
+
+    void addUser(MyUser user);
+
 }

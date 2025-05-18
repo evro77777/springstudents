@@ -1,4 +1,4 @@
-package ru.kors.springstudents.repository;
+package ru.kors.springstudents.repository.students;
 
 import org.springframework.stereotype.Repository;
 import ru.kors.springstudents.model.Student;

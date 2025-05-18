@@ -33,5 +33,5 @@ build/
 .vscode/
 
 ### intelj idea ###
-springstudents/idea/
+springstudents/.idea/
 
