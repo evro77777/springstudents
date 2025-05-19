@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class InMemoryStudentService implements StudentService {
     private final InMemoryStudentDAO inMemoryStudentDAO;
-    private final UserRepository userRepository;
+
 
     @Override
     public List<Student> findAllStudent() {
@@ -42,10 +42,6 @@ public class InMemoryStudentService implements StudentService {
 
     }
 
-    @Override
-    public void addUser(MyUser user) {
-        userRepository.save(user);
-    }
 }
 
 

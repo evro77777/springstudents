@@ -18,6 +18,5 @@ public interface StudentService {
 
     void deleteStudent(String email);
 
-    void addUser(MyUser user);
 
 }

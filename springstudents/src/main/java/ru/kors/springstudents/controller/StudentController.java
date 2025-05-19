@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.kors.springstudents.model.MyUser;
 import ru.kors.springstudents.model.Student;
+import ru.kors.springstudents.service.myusers.MyUserDetailsService;
 import ru.kors.springstudents.service.students.StudentService;
 
 import java.util.List;
@@ -16,8 +17,9 @@ import java.util.List;
 public class StudentController {
 
     private StudentService studentService;
+    private MyUserDetailsService userDetailsService;
 
-    @GetMapping("welcome")
+    @GetMapping("/welcome")
     public String welcome() {
         return "Welcome to start page...";
     }
@@ -57,7 +59,7 @@ public class StudentController {
 
     @PostMapping("/new_user")
     public String addUser(@RequestBody MyUser user){
-        studentService.addUser(user);
+        userDetailsService.addUser(user);
         return "User  is saved";
     }
 

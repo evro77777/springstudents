@@ -1,6 +1,5 @@
 package ru.kors.springstudents.service.myusers;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,14 +13,21 @@ import ru.kors.springstudents.repository.myusers.UserRepository;
 import java.util.Optional;
 
 @Service
-public class MyUserDetailService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<MyUser> user = repository.findByName(username);
+        Optional<MyUser> user = userRepository.findByName(username);
         return user.map(MyUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
+    }
+
+    public void addUser(MyUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 }

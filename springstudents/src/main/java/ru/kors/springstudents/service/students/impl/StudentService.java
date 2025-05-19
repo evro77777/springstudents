@@ -18,8 +18,6 @@ import java.util.Optional;
 @Primary
 public class StudentService implements ru.kors.springstudents.service.students.StudentService {
     private final StudentRepository studentRepository;
-    private final UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<Student> findAllStudent() {
@@ -30,8 +28,7 @@ public class StudentService implements ru.kors.springstudents.service.students.S
     public Student saveStudent(Student student) {
         //todo#1
         Optional<Student> studentOptional = Optional.ofNullable(studentRepository.findByEmail(student.getEmail()));
-        Optional<Student> studentOptionalById = studentRepository.findById(student.getId());
-        if (studentOptional.isPresent() || studentOptionalById.isPresent()) {
+        if (studentOptional.isPresent()) {
             throw new IllegalStateException("A student  already exists");
         }
         return studentRepository.save(student);
@@ -44,9 +41,9 @@ public class StudentService implements ru.kors.springstudents.service.students.S
 
     @Override
     public Student updateStudent(Student student) {
-        Optional<Student> optionalStudent = studentRepository.findById(student.getId());
-        if (optionalStudent.isEmpty()) {
-            throw new IllegalStateException(String.format("Student with id = %d not found", student.getId()));
+        Student std = studentRepository.findByEmail(student.getEmail());
+        if (std == null) {
+            throw new IllegalStateException(String.format("Student with email = %s not found", student.getEmail()));
         }
         return studentRepository.save(student);
     }
@@ -57,9 +54,5 @@ public class StudentService implements ru.kors.springstudents.service.students.S
 
     }
 
-    @Override
-    public void addUser(MyUser user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-    }
+
 }
