@@ -31,3 +31,4 @@ public class MyUserDetailsService implements UserDetailsService {
         userRepository.save(user);
     }
 }
+
