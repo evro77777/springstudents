@@ -3,6 +3,7 @@ package ru.kors.springstudents.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -33,7 +34,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers( "/api/v1/students/new_user", "/api/v1/students/welcome").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET,
+                        "/api/v1/students/new_user",
+                                "/api/v1/students/welcome",
+                                "/api/v1/publish"
+                        ).permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/v1/publish").permitAll()
                         .requestMatchers("api/v1/students/**").authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();

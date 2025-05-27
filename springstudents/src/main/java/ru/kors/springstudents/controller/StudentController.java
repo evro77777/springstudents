@@ -2,6 +2,9 @@ package ru.kors.springstudents.controller;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.kors.springstudents.model.MyUser;
@@ -18,6 +21,8 @@ public class StudentController {
 
     private StudentService studentService;
     private MyUserDetailsService userDetailsService;
+
+
 
     @GetMapping("/welcome")
     public String welcome() {
@@ -58,9 +63,11 @@ public class StudentController {
 
 
     @PostMapping("/new_user")
-    public String addUser(@RequestBody MyUser user){
+    public String addUser(@RequestBody MyUser user) {
         userDetailsService.addUser(user);
         return "User  is saved";
     }
+
+
 
 }
