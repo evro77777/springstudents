@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.kors.springstudents.model.MyUser;
 import ru.kors.springstudents.model.Person;
+import ru.kors.springstudents.model.Student;
 
 @Service
 public class RabbitMQJsonProducer {
@@ -21,15 +22,15 @@ public class RabbitMQJsonProducer {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQJsonProducer.class);
 
-    private AmqpTemplate amqpTemplate;
+    private final AmqpTemplate amqpTemplate;
 
     public RabbitMQJsonProducer(AmqpTemplate amqpTemplate) {
         this.amqpTemplate = amqpTemplate;
     }
 
-    public void sendJsonMessage(Person person) {
-        LOGGER.info(String.format("Json message sent -> %s", person.toString()));
-        amqpTemplate.convertAndSend(exchange, routingJsonKey, person);
+    public void sendJsonMessage(Student student) {
+        LOGGER.info(String.format("Json message sent -> %s", student.toString()));
+        amqpTemplate.convertAndSend(exchange, routingJsonKey, student);
     }
 
 

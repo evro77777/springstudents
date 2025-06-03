@@ -26,8 +26,10 @@ public class Student {
     private String email;
     @Column(name="age")
     private Integer age;
-    @Column(name="university_id")
-    private Long universityId;
+
+    @ManyToOne
+    @JoinColumn(name="university_id")
+    private University university;
 
 
 }

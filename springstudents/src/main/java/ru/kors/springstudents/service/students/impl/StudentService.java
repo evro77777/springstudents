@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import ru.kors.springstudents.model.Student;
 import ru.kors.springstudents.repository.students.StudentRepository;
+import ru.kors.springstudents.service.publisher.RabbitMQProducer;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @Primary
 public class StudentService implements ru.kors.springstudents.service.students.StudentService {
     private final StudentRepository studentRepository;
+    private final RabbitMQProducer producer;
 
     @Override
     public List<Student> findAllStudent() {
@@ -27,6 +29,7 @@ public class StudentService implements ru.kors.springstudents.service.students.S
         if (studentOptional.isPresent()) {
             throw new IllegalStateException("A student  already exists");
         }
+        producer.sendMessage(String.format("Student with email %s created", student.getEmail()));
         return studentRepository.save(student);
     }
 

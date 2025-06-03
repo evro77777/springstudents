@@ -11,7 +11,7 @@ import ru.kors.springstudents.service.publisher.RabbitMQProducer;
 @RestController
 @RequestMapping("/api/v1")
 public class MessageController {
-    private RabbitMQProducer producer;
+    private final RabbitMQProducer producer;
 
     public MessageController(RabbitMQProducer producer) {
         this.producer = producer;
