@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.kors.springstudents.model.Student;
 import ru.kors.springstudents.repository.students.StudentRepository;
 import ru.kors.springstudents.service.publisher.RabbitMQProducer;
+import ru.kors.springstudents.service.students.StudentService;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 @Primary
-public class StudentService implements ru.kors.springstudents.service.students.StudentService {
+public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
     private final RabbitMQProducer producer;
 

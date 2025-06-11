@@ -1,18 +1,17 @@
 package ru.kors.springstudents.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Entity
 @Data
 @Table(name = "university")
 @AllArgsConstructor
 @NoArgsConstructor
-public class University {
+public class UniversityDetails {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +20,5 @@ public class University {
     @Column(name = "university_name")
     private String universityName;
 
+    private Long countStudents;
 }
