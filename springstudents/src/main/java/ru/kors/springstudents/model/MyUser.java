@@ -6,20 +6,21 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name="name", unique = true)
+    @Column(name = "name", unique = true)
     private String name;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name="role")
+    @Column(name = "role")
     private String roles;
+
 
 }

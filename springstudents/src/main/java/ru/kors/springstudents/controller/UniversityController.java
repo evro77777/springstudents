@@ -26,7 +26,7 @@ public class UniversityController {
         return universityService.findAll();
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/{id}")
     public Optional<UniversityDetails> findById(@PathVariable("id") Long id) {
         return universityService.findById(id);
