@@ -35,13 +35,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET,
-                                "/api/v1/students/new_user",
-                                "/api/v1/students/welcome",
-                                "/api/v1/publish"
-                        ).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/publish").permitAll()
-                        .requestMatchers("api/v1/students/**",
-                                "api/v1/university/**").authenticated())
+                                        "/api/v1/students/welcome",
+                                        "/api/v1/publish"
+                                ).permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/publish",
+                                        "/api/v1/users/registration"
+
+                                ).permitAll()
+
+                                .requestMatchers("api/v1/students/**",
+                                        "api/v1/university/**").authenticated()
+                )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
 

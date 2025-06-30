@@ -2,14 +2,9 @@ package ru.kors.springstudents.controller;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.kors.springstudents.model.MyUser;
 import ru.kors.springstudents.model.Student;
-import ru.kors.springstudents.service.myusers.MyUserDetailsService;
 import ru.kors.springstudents.service.students.StudentService;
 
 import java.util.List;
@@ -20,8 +15,6 @@ import java.util.List;
 public class StudentController {
 
     private StudentService studentService;
-    private MyUserDetailsService userDetailsService;
-
 
 
     @GetMapping("/welcome")
@@ -60,14 +53,6 @@ public class StudentController {
     public void deleteStudent(@PathVariable("email") String email) {
         studentService.deleteStudent(email);
     }
-
-
-    @PostMapping("/new_user")
-    public String addUser(@RequestBody MyUser user) {
-        userDetailsService.addUser(user);
-        return "User  is saved";
-    }
-
 
 
 }
