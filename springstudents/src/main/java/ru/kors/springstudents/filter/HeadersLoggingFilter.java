@@ -1,4 +1,4 @@
-package ru.kors.springstudents.config;
+package ru.kors.springstudents.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,9 +12,9 @@ import java.util.Collections;
 import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 
 
-@Component
+//@Component
 @Slf4j
-@Order(0)
+@Order(value = 0)
 public class HeadersLoggingFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

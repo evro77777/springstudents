@@ -1,6 +1,7 @@
 package ru.kors.springstudents.config;
 
 
+import jakarta.servlet.Filter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.kors.springstudents.filter.PasswordLengthFilter;
 import ru.kors.springstudents.service.myusers.MyUserDetailsService;
 
 @Configuration
@@ -32,11 +35,13 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, PasswordLengthFilter passwordLengthFilter) throws Exception {
+
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET,
                                         "/api/v1/students/welcome",
-                                        "/api/v1/publish"
+                                        "/api/v1/publish",
+                                        "/"
                                 ).permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/v1/publish",
                                         "/api/v1/users/registration"
@@ -47,9 +52,16 @@ public class SecurityConfig {
                                         "api/v1/university/**").authenticated()
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                .addFilterAfter(passwordLengthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
 
     }
+
+    @Bean
+    public PasswordLengthFilter passwordLengthFilter() {
+        return new PasswordLengthFilter();
+    }
+
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
