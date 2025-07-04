@@ -3,33 +3,32 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="create_university" author="Sergey I">
+    <changeSet id="create_users" author="Sergey I">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="university"/>
+                <tableExists tableName="users"/>
             </not>
         </preConditions>
 
 
-        <createTable tableName="university">
+        <createTable tableName="users">
             <column name="id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="universityName" type="varchar(50)">
+            <column name="name" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
+            <column name="password" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+
 
         </createTable>
 
 
-    </changeSet>
-
-
-    <changeSet id="v1-4" author="Sergey I">
-        <preConditions onFail="MARK_RAN">
-            <tableIsEmpty tableName="university"/>
-        </preConditions>
-        <loadData tableName="university" file="db/data/university-data.csv"/>
     </changeSet>
 
 

@@ -3,7 +3,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="v1-1" author="Sergey I">
+    <changeSet id="create_students" author="Sergey I">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="students"/>
@@ -31,15 +31,24 @@
                 <constraints nullable="true"/>
             </column>
 
+            <column name="university_id" type="bigint">
+                <constraints nullable="false"/>
+
+            </column>
+
 
         </createTable>
-
+        <!-- Добавляем внешний ключ на таблицу university -->
+        <addForeignKeyConstraint
+                baseTableName="students"
+                baseColumnNames="university_id"
+                constraintName="fk_students_university"
+                referencedTableName="university"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="RESTRICT"/>
 
     </changeSet>
-
-
-
-
 
 
 </databaseChangeLog>

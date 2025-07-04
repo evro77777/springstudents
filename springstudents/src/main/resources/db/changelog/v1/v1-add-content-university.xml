@@ -3,10 +3,11 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-
-    <changeSet id="drop-col-age" author="Sergey I">
-        <!-- Удаляем  колонку age -->
-        <dropColumn tableName="students" columnName="age" />
+    <changeSet id="add-content-univeristy" author="Sergey I">
+        <preConditions onFail="MARK_RAN">
+            <tableIsEmpty tableName="university"/>
+        </preConditions>
+        <loadData tableName="university" file="db/data/university-data.csv"/>
     </changeSet>
 
 
