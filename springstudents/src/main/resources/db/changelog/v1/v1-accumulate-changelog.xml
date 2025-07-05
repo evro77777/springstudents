@@ -3,8 +3,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <include file="v1-create-table-students.xml" relativeToChangelogFile="true"/>
     <include file="v1-create-table-university.xml" relativeToChangelogFile="true"/>
+    <include file="v1-create-table-students.xml" relativeToChangelogFile="true"/>
     <include file="v1-create-table-users.xml" relativeToChangelogFile="true"/>
 
     <include file="v1-add-content-students.xml" relativeToChangelogFile="true"/>
