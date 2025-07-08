@@ -52,7 +52,7 @@ public class SecurityConfig {
                                         "api/v1/university/**").authenticated()
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
-                .addFilterAfter(passwordLengthFilter, UsernamePasswordAuthenticationFilter.class)
+                //.addFilterAfter(passwordLengthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
 
     }

@@ -29,7 +29,6 @@ public class PasswordLengthFilter extends OncePerRequestFilter {
         if (registerRequestMatcher.matches(cachingRequest)) {
             Map<String, String> requestBody = objectMapper.readValue(cachingRequest.getInputStream(), Map.class);
             String password = requestBody.get("password");
-            System.out.println("password=" + password);
             if (password == null || password.length() < 8) {
                 System.out.println("check pass==" + password);
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

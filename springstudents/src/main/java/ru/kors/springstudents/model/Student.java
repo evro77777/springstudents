@@ -8,7 +8,7 @@ import java.time.Period;
 
 @Entity
 @Data
-@Table(name = "students")
+@Table(name="students")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student {
